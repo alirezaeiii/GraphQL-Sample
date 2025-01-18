@@ -1,5 +1,5 @@
 # QraphQL Sample
-A sample which showcases Kotlin, Jetpack Compose, Hilt and Apollo GraphQL.
+A sample which showcases Kotlin, Jetpack Compose, Hilt and [Apollo GraphQL](https://studio.apollographql.com/public/countries/).
 
 ## Prerequisites
 
