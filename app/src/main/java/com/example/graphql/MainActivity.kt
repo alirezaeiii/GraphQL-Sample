@@ -4,7 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.graphql.presentation.CountryScreen
@@ -21,11 +25,14 @@ class MainActivity : ComponentActivity() {
             QraphQLSampleTheme {
                 val viewModel = hiltViewModel<CountryViewModel>()
                 val state by viewModel.uiState.collectAsStateWithLifecycle()
-                CountryScreen(
-                    state = state,
-                    onSelectCountry = viewModel::selectCountry,
-                    dismiss = viewModel::dismiss
-                )
+                Scaffold { contentPadding ->
+                    CountryScreen(
+                        state = state,
+                        onSelectCountry = viewModel::selectCountry,
+                        dismiss = viewModel::dismiss,
+                        modifier = Modifier.padding(contentPadding)
+                    )
+                }
             }
         }
     }
