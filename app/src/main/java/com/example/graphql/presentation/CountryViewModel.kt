@@ -1,10 +1,10 @@
-package com.example.qraphql.presentation
+package com.example.graphql.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.qraphql.domain.CountryClient
-import com.example.qraphql.domain.DetailedCountry
-import com.example.qraphql.domain.SimpleCountry
+import com.example.graphql.domain.CountryClient
+import com.example.graphql.domain.DetailedCountry
+import com.example.graphql.domain.SimpleCountry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

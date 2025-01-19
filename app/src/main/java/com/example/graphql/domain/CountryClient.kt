@@ -1,4 +1,4 @@
-package com.example.qraphql.domain
+package com.example.graphql.domain
 
 interface CountryClient {
     suspend fun getCountries(): List<SimpleCountry>

@@ -1,4 +1,4 @@
-package com.example.qraphql.ui.theme
+package com.example.graphql.ui.theme
 
 import android.app.Activity
 import android.os.Build

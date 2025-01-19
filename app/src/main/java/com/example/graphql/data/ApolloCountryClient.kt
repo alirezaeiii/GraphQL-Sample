@@ -1,12 +1,12 @@
-package com.example.qraphql.data
+package com.example.graphql.data
 
 import com.apollographql.apollo.ApolloClient
 import com.example.CountriesQuery
 import com.example.CountryQuery
-import com.example.qraphql.domain.CountryClient
-import com.example.qraphql.domain.DetailedCountry
-import com.example.qraphql.domain.SimpleCountry
-import com.example.qraphql.domain.asDomainModel
+import com.example.graphql.domain.CountryClient
+import com.example.graphql.domain.DetailedCountry
+import com.example.graphql.domain.SimpleCountry
+import com.example.graphql.domain.asDomainModel
 import javax.inject.Inject
 import javax.inject.Singleton
 

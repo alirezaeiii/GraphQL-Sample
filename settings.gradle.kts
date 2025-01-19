@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "QraphQL-Sample"
+rootProject.name = "GraphQL-Sample"
 include(":app")

@@ -1,4 +1,4 @@
-package com.example.qraphql.presentation
+package com.example.graphql.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,8 +24,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import com.example.qraphql.domain.DetailedCountry
-import com.example.qraphql.domain.SimpleCountry
+import com.example.graphql.domain.DetailedCountry
+import com.example.graphql.domain.SimpleCountry
 
 @Composable
 fun CountryScreen(

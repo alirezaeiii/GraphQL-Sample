@@ -1,4 +1,4 @@
-package com.example.qraphql.domain
+package com.example.graphql.domain
 
 import com.example.CountryQuery
 

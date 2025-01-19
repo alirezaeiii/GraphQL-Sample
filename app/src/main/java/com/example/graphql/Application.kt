@@ -1,4 +1,4 @@
-package com.example.qraphql
+package com.example.graphql
 
 import dagger.hilt.android.HiltAndroidApp
 

@@ -1,7 +1,7 @@
-package com.example.qraphql.di
+package com.example.graphql.di
 
-import com.example.qraphql.data.ApolloCountryClient
-import com.example.qraphql.domain.CountryClient
+import com.example.graphql.data.ApolloCountryClient
+import com.example.graphql.domain.CountryClient
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

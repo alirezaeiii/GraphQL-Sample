@@ -1,4 +1,4 @@
-package com.example.qraphql.di
+package com.example.graphql.di
 
 import android.util.Log
 import com.apollographql.apollo.ApolloClient
