@@ -19,7 +19,7 @@ object ApolloModule {
     @Singleton
     fun getApolloClient(): ApolloClient {
         val loggingInterceptor = HttpLoggingInterceptor { message -> Log.d("Apollo", message) }
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY // Log full body
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return ApolloClient.Builder()
             .serverUrl("https://countries.trevorblades.com/graphql")
             .okHttpClient(
