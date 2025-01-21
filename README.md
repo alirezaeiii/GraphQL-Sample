@@ -1,5 +1,5 @@
 # GraphQL Sample
-A sample which showcases Kotlin, Jetpack Compose, Hilt and [Apollo GraphQL](https://studio.apollographql.com/public/countries/).
+A sample which showcases Kotlin, Jetpack Compose, Hilt and [Apollo GraphQL](https://studio.apollographql.com/public/countries/) inspired by [Philipp Lackner](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.youtube.com/watch%3Fv%3DME3LH2bib3g&ved=2ahUKEwjw-5zK_IeLAxWrGDQIHfSyNy0QwqsBegQICxAF&usg=AOvVaw25hDoSBPjO19O_dbNVqfoW)
 
 ## Prerequisites
 
