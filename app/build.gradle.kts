@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.qraphql"
+    namespace = "com.example.graphql"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.qraphql"
+        applicationId = "com.example.graphql"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
