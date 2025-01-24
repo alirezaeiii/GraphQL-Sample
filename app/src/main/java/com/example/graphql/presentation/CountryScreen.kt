@@ -36,10 +36,10 @@ fun CountryScreen(
     dismiss: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    if (state.error != null) {
+        Toast.makeText(LocalContext.current, state.error, Toast.LENGTH_LONG).show()
+    }
     Box(modifier = modifier.fillMaxSize()) {
-        if (state.error != null) {
-            Toast.makeText(LocalContext.current, state.error, Toast.LENGTH_LONG).show()
-        }
         if (state.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else {
