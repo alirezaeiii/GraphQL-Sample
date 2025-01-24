@@ -16,34 +16,33 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ApolloCountryClient @Inject constructor(private val apolloClient: ApolloClient,
-    @ApplicationContext private val context: Context) :
-    CountryClient {
+class ApolloCountryClient @Inject constructor(
+    private val apolloClient: ApolloClient,
+    @ApplicationContext private val context: Context
+) : CountryClient {
 
     override suspend fun getCountries(): Result<List<SimpleCountry>> {
-        try {
-            return Result.success(
+        return try {
+            Result.success(
                 apolloClient.query(CountriesQuery())
-                    .execute().data?.countries?.map { it.asDomainModel() }
-                    ?: return Result.failure(
-                        CountryException(context.getString(R.string.error_message))
-                    )
+                    .execute().dataOrThrow().countries.map { it.asDomainModel() }
             )
         } catch (e: ApolloException) {
-            return Result.failure(e)
+            Result.failure(CountryException(context.getString(R.string.error_message)))
         }
     }
 
     override suspend fun getCountry(code: String): Result<DetailedCountry> {
         try {
             return Result.success(
-                apolloClient.query(CountryQuery(code)).execute().data?.country?.asDomainModel()
+                apolloClient.query(CountryQuery(code)).execute()
+                    .dataOrThrow().country?.asDomainModel()
                     ?: return Result.failure(
-                        CountryException(context.getString(R.string.error_message))
+                        CountryException(context.getString(R.string.no_country))
                     )
             )
         } catch (e: ApolloException) {
-            return Result.failure(e)
+            return Result.failure(CountryException(context.getString(R.string.error_message)))
         }
     }
 }
