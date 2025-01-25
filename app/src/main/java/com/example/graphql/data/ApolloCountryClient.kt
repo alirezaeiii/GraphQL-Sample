@@ -2,6 +2,8 @@ package com.example.graphql.data
 
 import android.content.Context
 import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.api.ApolloResponse
+import com.apollographql.apollo.api.Operation
 import com.apollographql.apollo.exception.ApolloException
 import com.example.CountriesQuery
 import com.example.CountryQuery
@@ -21,28 +23,32 @@ class ApolloCountryClient @Inject constructor(
     @ApplicationContext private val context: Context
 ) : CountryClient {
 
-    override suspend fun getCountries(): Result<List<SimpleCountry>> {
+    override suspend fun getCountries(): Result<List<SimpleCountry>> =
+        executeQuery(
+            query = { apolloClient.query(CountriesQuery()).execute() },
+            transform = { it.countries.map { country -> country.asDomainModel() } }
+        )
+
+    override suspend fun getCountry(code: String): Result<DetailedCountry> =
+        executeQuery(
+            query = { apolloClient.query(CountryQuery(code)).execute() },
+            transform = {
+                it.country?.asDomainModel()
+                    ?: throw CountryException(context.getString(R.string.no_country))
+            }
+        )
+
+    private inline fun <D : Operation.Data, T> executeQuery(
+        query: () -> ApolloResponse<D>,
+        transform: (D) -> T
+    ): Result<T> {
         return try {
-            Result.success(
-                apolloClient.query(CountriesQuery())
-                    .execute().dataOrThrow().countries.map { it.asDomainModel() }
-            )
+            val data = query().dataOrThrow()
+            Result.success(transform(data))
+        } catch (e: CountryException) {
+            Result.failure(e)
         } catch (e: ApolloException) {
             Result.failure(CountryException(context.getString(R.string.error_message)))
-        }
-    }
-
-    override suspend fun getCountry(code: String): Result<DetailedCountry> {
-        try {
-            return Result.success(
-                apolloClient.query(CountryQuery(code)).execute()
-                    .dataOrThrow().country?.asDomainModel()
-                    ?: return Result.failure(
-                        CountryException(context.getString(R.string.no_country))
-                    )
-            )
-        } catch (e: ApolloException) {
-            return Result.failure(CountryException(context.getString(R.string.error_message)))
         }
     }
 }
