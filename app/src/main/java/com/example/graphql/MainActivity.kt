@@ -29,6 +29,7 @@ class MainActivity : ComponentActivity() {
                         state = state,
                         onSelectCountry = viewModel::selectCountry,
                         dismiss = viewModel::dismiss,
+                        clearError = viewModel::onErrorShown,
                         modifier = Modifier.padding(contentPadding)
                     )
                 }

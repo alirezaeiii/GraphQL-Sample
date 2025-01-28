@@ -47,13 +47,14 @@ class CountryViewModel @Inject constructor(private val countryClient: CountryCli
 
     fun selectCountry(code: String) {
         viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
             countryClient.getCountry(code).fold(
                 onSuccess = { country ->
-                    _uiState.update { it.copy(selectedCountry = country) }
+                    _uiState.update { it.copy(selectedCountry = country, isLoading = false) }
                 },
                 onFailure = { error ->
                     _uiState.update {
-                        it.copy(error = error.localizedMessage)
+                        it.copy(error = error.localizedMessage, isLoading = false)
                     }
                 }
             )
@@ -63,6 +64,12 @@ class CountryViewModel @Inject constructor(private val countryClient: CountryCli
     fun dismiss() {
         viewModelScope.launch {
             _uiState.update { it.copy(selectedCountry = null) }
+        }
+    }
+
+    fun onErrorShown() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(error = null) }
         }
     }
 }
