@@ -38,48 +38,34 @@ fun CountryScreen(
     state: CountryUiState,
     onSelectCountry: (String) -> Unit,
     dismiss: () -> Unit,
-    clearError: () -> Unit,
-    scope: CoroutineScope = rememberCoroutineScope(),
-    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
     modifier: Modifier = Modifier
 ) {
-    Scaffold(
-        snackbarHost = {
-            SnackbarHost(hostState = snackbarHostState)
-        }) {
-        state.error?.let { error ->
-            scope.launch {
-                snackbarHostState.showSnackbar(error)
-                clearError.invoke()
-            }
+    Box(modifier = modifier.fillMaxSize()) {
+        if (state.isLoading) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
-        Box(modifier = modifier.fillMaxSize()) {
-            if (state.isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            }
 
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(state.countries) { country ->
-                    CountryItem(
-                        country = country,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { onSelectCountry.invoke(country.code) }
-                            .padding(16.dp)
-                    )
-                }
-            }
-
-            if (state.selectedCountry != null) {
-                CountryDialog(
-                    detailedCountry = state.selectedCountry,
-                    dismiss = dismiss,
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            items(state.countries) { country ->
+                CountryItem(
+                    country = country,
                     modifier = Modifier
-                        .clip(RoundedCornerShape(10.dp))
-                        .background(MaterialTheme.colorScheme.surface)
+                        .fillMaxWidth()
+                        .clickable { onSelectCountry.invoke(country.code) }
                         .padding(16.dp)
                 )
             }
+        }
+
+        if (state.selectedCountry != null) {
+            CountryDialog(
+                detailedCountry = state.selectedCountry,
+                dismiss = dismiss,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(MaterialTheme.colorScheme.surface)
+                    .padding(16.dp)
+            )
         }
     }
 }
