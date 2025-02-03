@@ -47,7 +47,7 @@ class CountryViewModel @Inject constructor(private val countryClient: CountryCli
 
     fun selectCountry(code: String) {
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true) }
+            _uiState.update { it.copy(isLoading = true, error = null) }
             countryClient.getCountry(code).fold(
                 onSuccess = { country ->
                     _uiState.update { it.copy(selectedCountry = country, isLoading = false) }
@@ -64,12 +64,6 @@ class CountryViewModel @Inject constructor(private val countryClient: CountryCli
     fun dismiss() {
         viewModelScope.launch {
             _uiState.update { it.copy(selectedCountry = null) }
-        }
-    }
-
-    fun onErrorShown() {
-        viewModelScope.launch {
-            _uiState.update { it.copy(error = null) }
         }
     }
 }

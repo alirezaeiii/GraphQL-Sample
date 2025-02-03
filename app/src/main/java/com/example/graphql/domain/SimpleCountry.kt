@@ -9,7 +9,9 @@ data class SimpleCountry(
     val capital: String
 )
 
-fun CountriesQuery.Country.asDomainModel() = SimpleCountry(
+fun List<CountriesQuery.Country>.asDomainModel() = map(CountriesQuery.Country::asDomainModel)
+
+private fun CountriesQuery.Country.asDomainModel() = SimpleCountry(
     code = code,
     name = name,
     emoji = emoji,

@@ -44,7 +44,6 @@ class MainActivity : ComponentActivity() {
                     state.error?.let { error ->
                         scope.launch {
                             snackbarHostState.showSnackbar(error)
-                            viewModel.onErrorShown()
                         }
                     }
                 }

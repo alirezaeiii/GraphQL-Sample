@@ -26,7 +26,7 @@ class ApolloCountryClient @Inject constructor(
     override suspend fun getCountries(): Result<List<SimpleCountry>> =
         executeQuery(
             query = { apolloClient.query(CountriesQuery()).execute() },
-            transform = { it.countries.map { country -> country.asDomainModel() } }
+            transform = { it.countries.asDomainModel() }
         )
 
     override suspend fun getCountry(code: String): Result<DetailedCountry> =
